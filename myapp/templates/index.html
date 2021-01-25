@@ -1,0 +1,46 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+		<title>Homepage</title>
+		<!--link rel="stylesheet" href="{% static 'css/style.css' %}" /-->
+	</head>
+<!--
+	<div class="topnav">
+	  <a class="active" href="/home/">Home</a>
+	  <a href="/about/">About</a>
+	  <a href="/contact/">Contact Us</a>
+	  <input type="text" placeholder="Search..">
+	</div>
+-->
+	<body>
+		<div class="container">
+		<h1>Welcome to our Blog</h1>
+		<!--class="materialboxed" width="650" img src="{% static 'img/k3.jpg' %}" alt="KTM Bike"class="center"/-->
+		<!--img class="materialboxed" width="250" src="{% static 'img/del.jpg' %}"-->
+		<br>
+<table class="responsive-table">
+			<tr>
+				<th>Sno.</th>
+				<th>Blog Title</th>
+				<th>Author Name</th>
+				<th>Date of Publishing</th>
+				<th>Content</th>
+			</tr>
+			{% for i in page_object %}
+			<tr>
+				<td>{{i.id}}</td>
+				<td>{{i.title}}</td>
+				<td>{{i.author}}</td>
+				<td>{{i.dop}}</td>
+				<td>{{i.content}}</td>
+			</tr>
+		{% endfor %}
+{% if page_object.has_previous %}
+<a href="?page={{page_object.previous_page_number}}"><<<</a>
+{% endif %}
+Page{{page_object.number}} of {{page_object.paginator.num_pages}}
+{% if page_object.has_next %}
+<a href="?page={{page_object.next_page_number}}">>>></a>
+{% endif %}
+{% endblock %}
